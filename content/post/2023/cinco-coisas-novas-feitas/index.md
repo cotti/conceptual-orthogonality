@@ -73,7 +73,7 @@ Criar um instalador (especialmente e especificamente para Windows) não é uma t
 Graças ao vídeo-tutorial-bateção-de-cabeça do AngelSix mostrando o passo-a-passo de criar um instalador usando o WiX (versão 3), eu eventualmente consegui criar um instalador usando o WiX (versão 3).
 O bendito tutorial. Como eu tive paciência, você pergunta? Eu não tive, é a resposta.
 
-{{< youtube 6Yf-eDsRrnM class="" >}}
+{{< youtube 6Yf-eDsRrnM >}}
 
 A complexidade é um belo exemplar de Desnecessaurus Rex. Mas funcionou bem, e depois da configuração inicial não precisei mais fazer alterações.
 A experiência de conhecer o mundo dos instaladores para WindowsA experiência de conhecer o mundo dos instaladores para Windows
