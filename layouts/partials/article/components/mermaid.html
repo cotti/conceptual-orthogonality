@@ -1,0 +1,59 @@
+{{ if .Store.Get "hasMermaid" }}
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+    (function() {
+        // Store original mermaid source for re-rendering
+        const mermaidSources = new Map();
+        
+        function getTheme() {
+            const pageScheme = document.documentElement.getAttribute('data-scheme');
+            if (pageScheme === 'dark') return 'dark';
+            if (pageScheme === 'auto') {
+                return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default';
+            }
+            return 'default';
+        }
+        
+        function renderMermaid() {
+            const theme = getTheme();
+            mermaid.initialize({
+                startOnLoad: false,
+                look: 'handDrawn',
+                theme: theme
+            });
+            
+            // Store sources and clear rendered content
+            document.querySelectorAll('.mermaid').forEach((el, i) => {
+                if (!mermaidSources.has(i)) {
+                    mermaidSources.set(i, el.textContent || el.getAttribute('data-source'));
+                }
+                el.setAttribute('data-source', mermaidSources.get(i));
+                el.removeAttribute('data-processed');
+                el.innerHTML = mermaidSources.get(i);
+            });
+            
+            mermaid.run();
+        }
+        
+        // Initial render
+        document.addEventListener('DOMContentLoaded', renderMermaid);
+        
+        // Re-render on theme change (observe data-scheme attribute)
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName === 'data-scheme') {
+                    renderMermaid();
+                }
+            });
+        });
+        observer.observe(document.documentElement, { attributes: true });
+        
+        // Also listen for system theme changes when in auto mode
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+            if (document.documentElement.getAttribute('data-scheme') === 'auto') {
+                renderMermaid();
+            }
+        });
+    })();
+</script>
+{{ end }}

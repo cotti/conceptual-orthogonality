@@ -1,0 +1,60 @@
+/* =============================================================================
+   CUSTOM STYLES - Ortogonalidade Conceitual
+   =============================================================================
+   This file overrides or extends the Stack theme styles.
+   It's automatically loaded by the theme (imported in style.scss).
+   
+   Theme CSS variables are defined in:
+   themes/hugo-theme-stack/assets/scss/variables.scss
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   Sidebar Avatar Size
+   -----------------------------------------------------------------------------
+   Increase the avatar display size from the default 100-120px to 300px
+   -------------------------------------------------------------------------- */
+
+.left-sidebar {
+    --sidebar-avatar-size: 200px;
+}
+
+/* -----------------------------------------------------------------------------
+   Language Selector - Custom Link-Based Switcher
+   -----------------------------------------------------------------------------
+   Replaced the native <select> dropdown with links for better dark mode support.
+   Native <select>/<option> elements have very limited CSS support.
+   -------------------------------------------------------------------------- */
+
+#i18n-switch {
+    .language-selector {
+        color: var(--body-text-color);
+        
+        .current-lang {
+            font-weight: 500;
+        }
+        
+        a {
+            color: var(--body-text-color);
+            opacity: 0.7;
+            text-decoration: none;
+            
+            &:hover {
+                opacity: 1;
+                color: var(--accent-color);
+            }
+        }
+    }
+}
+
+/* -----------------------------------------------------------------------------
+   Mermaid Diagrams
+   -----------------------------------------------------------------------------
+   Let Mermaid handle its own theming via diagram frontmatter.
+   Only add minimal layout adjustments here if needed.
+   -------------------------------------------------------------------------- */
+
+.mermaid {
+    /* Ensure diagrams are centered and have proper spacing */
+    text-align: center;
+    margin: 1.5rem 0;
+}

@@ -1,0 +1,255 @@
+baseurl: https://blog.cotti.com.br/
+theme: hugo-theme-stack
+
+DefaultContentLanguage: pt-br
+defaultContentLanguageInSubdir: false
+
+hasCJKLanguage: false
+
+languages:
+  pt-br:
+    languageName: Português
+    languageCode: pt-BR
+    title: Ortogonalidade Conceitual
+    weight: 1
+    params:
+      sidebar:
+        subtitle: Minhas palavras e bom senso. Duas linhas que nunca cruzam.
+        emoji: 🐴
+    
+
+      footer:
+        customText: ""
+
+    menu:
+      main:
+        - identifier: posts
+          name: Posts
+          url: /
+          weight: -100
+          params:
+            icon: home
+      social:
+        - identifier: github
+          name: GitHub
+          url: https://github.com/cotti
+          params:
+            icon: brand-github
+        - identifier: bluesky
+          name: Bluesky
+          url: https://bsky.app/profile/cotti.com.br
+          params:
+            icon: brand-bluesky
+        - identifier: linkedin
+          name: LinkedIn
+          url: https://linkedin.com/in/felipecotti
+          params:
+            icon: brand-linkedin
+        - identifier: instagram
+          name: Instagram
+          url: https://www.instagram.com/felipe_cotti
+          params:
+            icon: brand-instagram
+        - identifier: youtube
+          name: YouTube
+          url: https://www.youtube.com/@felipecotti
+          params:
+            icon: brand-youtube
+        - identifier: mastodon
+          name: Mastodon
+          url: https://masto.donte.com.br/@cotti
+          params:
+            icon: brand-mastodon
+
+  en:
+    languageName: English
+    languageCode: en-US
+    title: Conceptual Orthogonality
+    weight: 2
+
+    params:
+      sidebar:
+        subtitle: Words of my own and common sense, two lines never crossing.
+        emoji: 🐴
+      footer:
+        customText: ""
+
+    menu:
+      main:
+        - identifier: posts
+          name: Posts
+          url: /en/
+          weight: -100
+          params:
+            icon: home
+      social:
+        - identifier: github
+          name: GitHub
+          url: https://github.com/cotti
+          params:
+            icon: brand-github
+        - identifier: bluesky
+          name: Bluesky
+          url: https://bsky.app/profile/cotti.com.br
+          params:
+            icon: brand-bluesky
+        - identifier: linkedin
+          name: LinkedIn
+          url: https://linkedin.com/in/felipecotti
+          params:
+            icon: brand-linkedin
+        - identifier: instagram
+          name: Instagram
+          url: https://www.instagram.com/felipe_cotti
+          params:
+            icon: brand-instagram
+        - identifier: youtube
+          name: YouTube
+          url: https://www.youtube.com/@felipecotti
+          params:
+            icon: brand-youtube
+        - identifier: mastodon
+          name: Mastodon
+          url: https://masto.donte.com.br/@cotti
+          params:
+            icon: brand-mastodon
+pagination:
+  pagerSize: 10
+permalinks:
+  post: /:year/:month/:day/:slug/
+  page: /:slug/
+
+params:
+  mainSections:
+    - post
+
+  featuredImageField: image
+  rssFullContent: true
+  favicon: /favicon.png
+
+  footer:
+    since: 2026
+    customText: ""
+
+  dateFormat:
+    published: "02/01/2006"
+    lastUpdated: "02/01/2006 15:04 MST"
+
+  sidebar:
+    emoji: 🏠
+    subtitle: ""
+    avatar:
+      enabled: true
+      local: true
+      src: img/avatar.jpg
+
+  article:
+    math: false
+    toc: true
+    readingTime: true
+    license:
+      enabled: false
+      default: ""
+
+  comments:
+    enabled: false
+    provider: ""
+
+    giscus:
+      repo: ""
+      repoID: ""
+      category: ""
+      categoryID: ""
+      mapping: "pathname"
+      lightTheme: "light"
+      darkTheme: "dark_dimmed"
+      reactionsEnabled: 1
+      emitMetadata: 0
+
+    utterances:
+      repo: ""
+      issueTerm: "pathname"
+      label: ""
+
+  widgets:
+    homepage:
+      - type: search
+      - type: archives
+        params:
+          limit: 5
+      - type: categories
+        params:
+          limit: 10
+      - type: tag-cloud
+        params:
+          limit: 10
+    page:
+      - type: toc
+
+  opengraph:
+    twitter:
+      site: ""
+      card: summary_large_image
+
+  defaultImage:
+    opengraph:
+      enabled: false
+      local: false
+      src: ""
+
+  colorScheme:
+    toggle: true
+    default: auto
+
+  imageProcessing:
+    cover:
+      enabled: true
+    content:
+      enabled: true
+
+related:
+  includeNewer: true
+  threshold: 60
+  toLower: false
+  indices:
+    - name: tags
+      weight: 100
+    - name: categories
+      weight: 200
+
+markup:
+  goldmark:
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          block:
+            - - \[
+              - \]
+            - - $$
+              - $$
+          inline:
+            - - \(
+              - \)
+    renderer:
+      unsafe: true
+
+  tableOfContents:
+    endLevel: 4
+    ordered: true
+    startLevel: 2
+
+  highlight:
+    noClasses: false
+    codeFences: true
+    guessSyntax: true
+    lineNoStart: 1
+    lineNos: true
+    lineNumbersInTable: true
+    tabWidth: 4
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON

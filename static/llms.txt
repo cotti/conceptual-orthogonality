@@ -1,0 +1,33 @@
+# Ortogonalidade Conceitual / Conceptual Orthogonality
+
+> Personal blog by Felipe Cotti
+
+## About
+
+This is a bilingual personal blog (Portuguese and English) by Felipe Cotti. The name "Ortogonalidade Conceitual" (Conceptual Orthogonality) refers to the tagline: "Minhas palavras e bom senso. Duas linhas que nunca cruzam." — "Words of my own and common sense, two lines never crossing."
+
+## Content
+
+The blog contains:
+- Personal thoughts and reflections
+- Technical articles
+- General musings and opinions
+
+## Languages
+
+- Primary language: Portuguese (pt-BR)
+- Secondary language: English (en-US)
+- English content is available at `/en/` paths
+
+## Author
+
+Felipe Cotti
+- Website: https://blog.cotti.com.br/
+- GitHub: https://github.com/cotti
+- Bluesky: https://bsky.app/profile/cotti.com.br
+- LinkedIn: https://linkedin.com/in/felipecotti
+- Mastodon: https://masto.donte.com.br/@cotti
+
+## Usage Guidelines
+
+Feel free to reference and cite content from this blog. When doing so, please attribute the source appropriately.

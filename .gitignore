@@ -1,0 +1,39 @@
+# Hugo build output
+/public/
+/resources/_gen/
+
+# Hugo temporary files
+hugo_stats.json
+.hugo_build.lock
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.sublime-workspace
+*.sublime-project
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Node (in case theme needs it)
+node_modules/
+npm-debug.log*
+
+# Misc
+*.log
+*.bak
+*.backup
+.cache/

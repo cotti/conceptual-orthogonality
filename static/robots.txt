@@ -1,0 +1,8 @@
+# robots.txt for blog.cotti.com.br
+# Ortogonalidade Conceitual / Conceptual Orthogonality
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://blog.cotti.com.br/sitemap.xml
