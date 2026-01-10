@@ -39,7 +39,7 @@ jobs:
             --baseURL "https://blog.cotti.com.br/"
 
       - name: Deploy to Server
-        uses: appleboy/scp-action@1.0.0
+        uses: appleboy/scp-action@ff85246acaad7bdce478db94a363cd2bf7c90345
         with:
           host: "cotti.com.br"
           username: ${{ secrets.BLOG_USER }}
