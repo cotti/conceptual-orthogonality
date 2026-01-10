@@ -49,5 +49,6 @@ jobs:
           host: "cotti.com.br"
           username: ${{ secrets.BLOG_USER }}
           key: ${{ secrets.BLOG_KEY }}
-          source: "public/"
+          source: "public/*"
           target: "/cotti.com.br/blog/"
+          strip_components: 1
