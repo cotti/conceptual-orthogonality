@@ -8,7 +8,6 @@ set -uo pipefail
 BLUESKY_HANDLE="${BLUESKY_HANDLE:?Missing BLUESKY_HANDLE secret}"
 BLUESKY_APP_PASSWORD="${BLUESKY_APP_PASSWORD:?Missing BLUESKY_APP_PASSWORD secret}"
 PDS_HOST="https://bsky.social"
-BASE_URL="https://blog.cotti.com.br"
 COMPARE_REF="${GITHUB_BEFORE:-HEAD~1}"
 POSTS_UPDATED=0
 
@@ -19,7 +18,7 @@ fi
 
 # ─── Dependency check ────────────────────────────────────────────────────────
 
-for cmd in curl jq; do
+for cmd in curl jq hugo; do
     command -v "$cmd" &>/dev/null || { echo "::error::$cmd is required but not installed"; exit 1; }
 done
 
@@ -289,32 +288,25 @@ process_file() {
     fi
 
     # Extract metadata
-    local title date_str image slug
+    local title image
     title=$(get_value "$fm" "title") || { echo "  Skipping (no title)"; return 0; }
-    date_str=$(get_value "$fm" "date") || { echo "  Skipping (no date)"; return 0; }
-
     image=$(get_value "$fm" "image") || true
-    slug=$(basename "$(dirname "$file")")
 
-    # Parse date components (YYYY-MM-DD...)
-    local year month day
-    year="${date_str:0:4}"
-    month="${date_str:5:2}"
-    day="${date_str:8:2}"
-
-    if [ -z "$year" ] || [ -z "$month" ] || [ -z "$day" ]; then
-        echo "  Skipping (cannot parse date: ${date_str})"
+    # Look up the permalink from hugo list all (populated before this function runs)
+    # Extract URL by pattern rather than field index — safe even if title contains commas
+    local url
+    url=$(echo "$HUGO_URLS" | grep "^${file}," | grep -o 'https://[^,]*')
+    if [ -z "$url" ]; then
+        echo "  Skipping (not found in hugo list all — may be future-dated or excluded)"
         return 0
     fi
 
-    # Determine language and compute URL
-    local lang url
+    # Determine language
+    local lang
     if [[ "$file" == *index.en.md ]]; then
         lang="en-US"
-        url="${BASE_URL}/en/${year}/${month}/${day}/${slug}/"
     else
         lang="pt-BR"
-        url="${BASE_URL}/${year}/${month}/${day}/${slug}/"
     fi
 
     # Resolve cover image path
@@ -366,7 +358,17 @@ fi
 echo "New/modified files:"
 echo "$NEW_FILES" | sed 's/^/  /'
 
-# ─── Step 2: Authenticate with Bluesky ───────────────────────────────────────
+# ─── Step 2: Get canonical URLs from Hugo ────────────────────────────────────
+
+echo ""
+echo "Resolving permalinks via hugo list all..."
+HUGO_URLS=$(hugo list all 2>/dev/null)
+if [ -z "$HUGO_URLS" ]; then
+    echo "::error::hugo list all returned no output"
+    exit 0
+fi
+
+# ─── Step 3: Authenticate with Bluesky ───────────────────────────────────────
 
 echo ""
 echo "Authenticating with Bluesky..."
@@ -389,7 +391,7 @@ fi
 
 echo "Authenticated as ${DID}"
 
-# ─── Step 3: Process each file ────────────────────────────────────────────────
+# ─── Step 4: Process each file ────────────────────────────────────────────────
 
 echo ""
 while IFS= read -r file; do
@@ -398,7 +400,7 @@ while IFS= read -r file; do
     process_file "$file" || echo "::warning::Failed to process ${file}, continuing..."
 done <<< "$NEW_FILES"
 
-# ─── Step 4: Commit and push if any posts were updated ────────────────────────
+# ─── Step 5: Commit and push if any posts were updated ────────────────────────
 
 echo ""
 echo "=== Summary: ${POSTS_UPDATED} post(s) updated ==="
@@ -409,8 +411,11 @@ if [ "$POSTS_UPDATED" -gt 0 ]; then
     git config user.email "github-actions[bot]@users.noreply.github.com"
     git add content/
     git commit -m "ci: add Bluesky comment URIs for new posts"
-    git push
-    echo "Changes pushed."
+    if git push; then
+        echo "Changes pushed."
+    else
+        echo "::warning::git push failed (frontmatter changes exist only in this build)"
+    fi
 fi
 
 echo "Done."

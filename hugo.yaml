@@ -5,6 +5,7 @@ DefaultContentLanguage: pt-br
 defaultContentLanguageInSubdir: false
 
 hasCJKLanguage: false
+removePathAccents: true
 
 languages:
   pt-br:
