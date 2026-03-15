@@ -6,6 +6,7 @@ draft: false
 image: "cover.jpg"
 categories: ["personal"]
 tags: ["autism", "diagnosis"]
+bluesky_comment_uri: "at://did:plc:prkinnkwhodd3e7kujd4nhqj/app.bsky.feed.post/3mh4brcv6gx2u"
 # series: []
 # author: ""
 # toc: true

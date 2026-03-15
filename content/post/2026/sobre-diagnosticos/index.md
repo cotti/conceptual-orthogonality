@@ -6,6 +6,7 @@ draft: false
 image: "cover.jpg"
 categories: ["pessoal"]
 tags: ["autismo", "diagnostico"]
+bluesky_comment_uri: "at://did:plc:prkinnkwhodd3e7kujd4nhqj/app.bsky.feed.post/3mh4brecskt24"
 # series: []
 # author: ""
 # toc: true
