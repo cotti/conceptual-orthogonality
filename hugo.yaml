@@ -152,8 +152,8 @@ params:
       default: ""
 
   comments:
-    enabled: false
-    provider: ""
+    enabled: true
+    provider: bluesky
 
     giscus:
       repo: ""

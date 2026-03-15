@@ -33,6 +33,13 @@ jobs:
           git submodule sync --recursive
           git submodule update --init --recursive --force
 
+      - name: Post new articles to Bluesky
+        env:
+          BLUESKY_HANDLE: ${{ secrets.BLUESKY_HANDLE }}
+          BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
+          GITHUB_BEFORE: ${{ github.event.before }}
+        run: bash scripts/bluesky-post.sh
+
       - name: Build with Hugo
         env:
           HUGO_ENVIRONMENT: production
