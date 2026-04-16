@@ -131,6 +131,13 @@ keywords:
 
 # Manual ordering in listings (lower = higher priority)
 # weight: 1
+
+# =============================================================================
+# BLUESKY COMMENTS (auto-populated by CI)
+# =============================================================================
+
+# bluesky_comment_uri: "at://did:plc:.../app.bsky.feed.post/..."
+
 ---
 
 Your content here...
@@ -333,6 +340,25 @@ tags:
 
 ---
 
+## Bluesky Comments
+
+The blog uses Bluesky as a comment system. When a new post is pushed to `main`, the CI pipeline automatically creates a corresponding Bluesky post and stores the AT Protocol URI in the frontmatter.
+
+- `bluesky_comment_uri`: AT Protocol URI of the corresponding Bluesky post.
+  Populated automatically by CI after the first deployment of a new post.
+  Format: `at://did:plc:.../app.bsky.feed.post/...`
+  Used by the comments partial to fetch and display the Bluesky thread as comments.
+
+**Example:**
+
+```yaml
+bluesky_comment_uri: "at://did:plc:abc123/app.bsky.feed.post/xyz789"
+```
+
+> **Note:** You should not need to set this manually. The CI script (`scripts/bluesky-post.sh`) handles it automatically for new posts. If you want to link an existing Bluesky post, you can set it manually — copy the AT URI from the Bluesky post URL (e.g. `https://bsky.app/profile/{did}/post/{rkey}` → `at://{did}/app.bsky.feed.post/{rkey}`).
+
+---
+
 ## Quick Reference
 
 ### Essential Fields
@@ -354,6 +380,7 @@ tags:
 | `toc` | `true` | Table of contents |
 | `comments` | `true` | Enable comments |
 | `slug` | filename | Custom URL |
+| `bluesky_comment_uri` | none (CI) | Bluesky post AT URI for comments |
 
 ### Date Formats
 
